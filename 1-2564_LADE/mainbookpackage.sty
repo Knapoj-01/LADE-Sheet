@@ -1,0 +1,319 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{mainbookpackage}[2021/04/19 Main Package]
+
+\RequirePackage{xunicode}
+\RequirePackage{xltxtra}
+\RequirePackage{graphicx, xcolor, float,amsmath, afterpage, geometry}
+\RequirePackage{amssymb}
+\RequirePackage{listings,setspace}
+\RequirePackage[inline]{enumitem}
+\RequirePackage{wrapfig,mathrsfs}
+\RequirePackage{fbox, boxedminipage2emod,systeme}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{tikz, fancyhdr}
+\RequirePackage[inter-unit-product=·]{siunitx}
+\RequirePackage{circuitikz}
+\RequirePackage[font=small,labelfont=bf]{caption}
+\RequirePackage{xkeyval, systeme}
+\RequirePackage[makeroom]{cancel}
+\RequirePackage{wrapfig}
+\RequirePackage{tabularx,mathtools}
+\RequirePackage{subcaption}
+\setenumerate{label=\textbf{\arabic*})}
+
+\DeclareOptionX{docversion}{%
+  \def\pdfdocversion{#1}%
+}
+
+\ExecuteOptionsX{docversion=1.0.0}
+\ProcessOptionsX
+
+
+
+\pagestyle{fancy}
+\fancyhead{} 
+\renewcommand{\headrulewidth}{0pt} 
+\fancyfoot{}  
+\fancyfoot[LE,RO]{\raisebox{6pt}{หน้า \thepage}}           
+
+
+\font\eng = "cmr10"
+\XeTeXlinebreaklocale{th}
+\XeTeXlinebreakskip 1pt plus 0pt minus 2pt
+\XeTeXlinebreakpenalty 200
+			
+\RequirePackage{fontspec}
+\setromanfont{TH Sarabun New}[Scale = 1.4]
+\setmathrm{CMU Serif}[Scale=1.05]
+
+\defaultfontfeatures{Mapping=tex-text}
+
+\newcounter{exampleno}[section]
+\setcounter{exampleno}{0}
+\newcommand{\InsertExNo}{\addtocounter{exampleno}{1}\noindent {\bf ตัวอย่างที่ \@ \arabic{section}.\arabic{exampleno}}}
+
+\newcommand{\PlaceHolder}{\begin{flushright}
+$\blacksquare$ 
+\end{flushright} }
+ 
+\newlength{\SoluIndent}
+\setlength{\SoluIndent}{1.2cm} 
+
+\newlength{\fboxrulebf}
+\newlength{\fboxsepbf}
+\newlength{\ExBoxClearance}
+
+\newenvironment{Example}[3][n]{ 
+	\setlength{\fboxrulebf}{\fboxrule}
+	\setlength{\fboxsepbf}{\fboxsep}
+	\setlength{\fboxsep}{0.3cm}
+	\setlength{\fboxrule}{3pt}
+	\setlength{\ExBoxClearance}{3pt}
+	\if #1c
+		\count255=1
+	\else \count255=0 
+	\fi
+	\vspace{\ExBoxClearance}
+	\begin{boxedminipage}[c]{0.9\textwidth}
+		\setlength{\fboxsep}{\fboxsepbf}
+		\setlength{\fboxrule}{\fboxrulebf}
+		\InsertExNo \hspace{0pt} \\ #2 \par
+		\vspace{0.3cm}\noindent\textbf{วิธีทำ:}\hspace{0.1cm}}{
+		\ifodd \count255
+			\end{boxedminipage}
+		\else 
+			\PlaceHolder 
+			\end{boxedminipage}  
+			\vspace{\ExBoxClearance}
+		\fi
+}
+
+\newenvironment{Example*}[5]{ 
+	\setlength{\fboxrulebf}{\fboxrule}
+	\setlength{\fboxsepbf}{\fboxsep}
+	\ifnum #1 > 0  
+		\setlength{\fboxsep}{#1 cm}
+	\else
+	\setlength{\fboxsep}{0.3cm} \fi
+	\ifnum #2 >0
+		\setlength{\fboxrule}{#2 pt}
+	\else
+		\setlength{\fboxrule}{3pt}	
+	\fi
+	\ifnum #3 >0
+		\setlength{\ExBoxClearance}{#3 pt}
+	\else
+		\setlength{\ExBoxClearance}{3pt}	
+	\fi
+	\if #4c
+		\count255=1
+	\else 
+		\count255=0 
+	\fi
+	\vspace{\ExBoxClearance}
+	\begin{boxedminipage}[c]{\textwidth}
+		\setlength{\fboxsep}{\fboxsepbf}
+		\setlength{\fboxrule}{\fboxrulebf}
+		\InsertExNo #5 \par
+		\vspace{0.3cm}\noindent\textbf{วิธีทำ}}{
+			\ifodd 
+				\count255
+				\end{boxedminipage}
+			\else 
+				\PlaceHolder 
+				\end{boxedminipage}
+				\vspace{\ExBoxClearance} 
+			\fi 
+}
+
+\newenvironment{ExampleCont}[1][n]{ 
+	\setlength{\fboxrulebf}{\fboxrule}
+	\setlength{\fboxsepbf}{\fboxsep}
+	\setlength{\fboxsep}{0.3cm}
+	\setlength{\fboxrule}{3pt}
+	\setlength{\ExBoxClearance}{3pt}
+	\if #1e
+		\count255=1
+	\else 
+		\count255=0 
+	\fi
+	\begin{boxedminipage}[c]{0.9\textwidth}
+		\setlength{\fboxsep}{\fboxsepbf}
+		\setlength{\fboxrule}{\fboxrulebf}}{
+			\ifodd 
+				\count255
+				\PlaceHolder 
+				\end{boxedminipage}
+				\vspace{\ExBoxClearance}
+			\else 
+	\end{boxedminipage} 
+	\fi
+}
+
+\newenvironment{ExampleCont*}[4]{ 
+	\setlength{\fboxrulebf}{\fboxrule}
+	\setlength{\fboxsepbf}{\fboxsep}
+	\ifnum #1 > 0  
+		\setlength{\fboxsep}{#1 cm}
+	\else
+		\setlength{\fboxsep}{0.5cm} 
+	\fi
+	\ifnum #2 >0
+		\setlength{\fboxrule}{#2 pt}
+	\else
+		\setlength{\fboxrule}{3pt}	
+	\fi
+	\ifnum #3 >0
+		\setlength{\ExBoxClearance}{#3 pt}
+	\else
+		\setlength{\ExBoxClearance}{3pt}	
+	\fi
+	\if #4e
+		\count255=1
+	\else 
+		\count255=0 
+	\fi
+	\vspace{\ExBoxClearance}
+	\begin{boxedminipage}[c]{\textwidth}
+		\setlength{\fboxsep}{\fboxsepbf}
+		\setlength{\fboxrule}{\fboxrulebf}}
+		{\ifodd 
+			\count255
+ 			\PlaceHolder
+ 			\end{boxedminipage}
+ 			\vspace{\ExBoxClearance}
+		\else 
+ 			\end{boxedminipage} 
+ 		\fi}
+ 		
+\newcommand{\grstep}[2][\relax]{%
+   \ensuremath{\mathrel{
+       {\mathop{\longrightarrow}\limits^{#2\mathstrut}_{
+                                     \begin{subarray}{l} #1 \end{subarray}}}}}}
+                                    
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\newcommand{\swap}{\leftrightarrow}
+\newcommand{\prob}{\noindent\textbf{\large ปัญหา: }}
+\newcommand{\probk}[1]{\noindent\textbf{\large  #1) }}
+\newcommand{\sol}{\noindent\textbf{\large วิธีทำ: }}
+\newcommand{\prf}{\noindent\textbf{\large พิสูจน์: }}
+\newcommand{\probe}{\noindent\textbf{\large Problem: }}
+\newcommand{\sole}{\noindent\textbf{\large Solution: }}
+\newcommand{\thme}{\noindent\textbf{\large Theorem }}
+\newcommand{\prfe}{\noindent\textbf{\large Proof }}
+\newcounter{probno}
+\setcounter{probno}{0}
+\newcommand{\probn}{\noindent\textbf{\large\stepcounter{probno}ปัญหาข้อที่ \arabic{probno}: }}
+\newcommand{\abs}[1]{\left| #1 \right|}
+
+\DeclareSIUnit{\revolution}{rev}
+\DeclareSIUnit{\rpm}{rpm}
+\DeclareSIUnit{\atm}{atm}
+
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\matr}[1]{#1}
+\newcommand{\uvect}[1]{\,\hat{\mathbf{#1}}}
+\newcommand{\diff}[3]{\frac{\mathrm{d^{#3}} #1}{\mathrm{d}#2^{#3}}}
+\newcommand{\pdiff}[3]{\frac{\partial ^{#3} #1}{\partial #2^{#3}}}
+\newcommand{\laplace}[1]{\mathcal{L}\left\lbrace #1 \right\rbrace}
+\newcommand{\ilaplace}[1]{\mathcal{L}^{-1}\left\lbrace #1 \right\rbrace}
+\newcommand\lp{\stackrel{\mathclap{\normalfont\mbox{\footnotesize $\mathcal{L}$}}}{\longleftrightarrow}}
+\newcommand{\del}{\vec{\mathbf{\nabla}}}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\Li}{Li}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\erf}{erf}
+\DeclareMathOperator{\erfi}{erfi}
+\DeclareMathOperator{\erfc}{erfc}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccsc}{arccsc}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccoth}{arccoth}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\arcsech}{arcsech}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arccosh}{arccosh}
+\DeclareMathOperator{\arccsch}{arccsch}
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\Si}{Si}
+\DeclareMathOperator{\Ci}{Ci}
+\DeclareMathOperator{\rect}{rect}
+\DeclareMathOperator{\tri}{tri}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\divg}{div}
+\DeclareMathOperator{\curl}{curl}
+
+\newtheorem{Thm}{ทฤษฎีบท}[section]
+
+\newtheorem{Def}{บทนิยาม}[section]
+
+
+\definecolor{ThmGray}{gray}{0.96}
+\definecolor{Black}{gray}{0}
+\newlength{\ThmBoxWidth}
+\setlength{\ThmBoxWidth}{0.8\textwidth}
+
+\newcommand{\definition}[1]{\begin{center} \setlength{\fboxsep}{0.75 em} \fcolorbox{Black}{ThmGray}{
+\begin{minipage}[c]{\ThmBoxWidth}
+\begin{Def}\hspace{0cm} \\ {\rm #1}\end{Def}
+\end{minipage}}\end{center}}
+
+\newcommand{\theorem}[2][ ]{\begin{center} \setlength{\fboxsep}{0.75 em} \fcolorbox{Black}{ThmGray}{
+\begin{minipage}[c]{\ThmBoxWidth}
+\begin{Thm} \label{thm:\arabic{section}.\arabic{Thm}}	{\textbf{ #1}} \hspace{0cm} \vspace{1ex}\\
+ {\rm #2}\end{Thm}
+\end{minipage}}\end{center}}
+
+\newcommand{\corollary}[1]{\begin{center} \setlength{\fboxsep}{0.75 em} \fcolorbox{Black}{ThmGray}{
+\begin{minipage}[c]{\ThmBoxWidth}
+\textbf{บทแทรก}\\
+#1
+\end{minipage}}\end{center}}
+\newcommand{\marginnote}[2]{\reversemarginpar
+	\marginpar{\vspace{#1 cm} $\blacksquare$ \@ #2}}
+	
+\newcommand{\ThmRef}[1]{{\it  ทฤษฎีบท  #1 }}
+
+\newcommand{\integrate}[4]{\int_{#1}^{#2} #3 \:\mathrm{d} #4}
+\newcommand{\ointegrate}[3]{\oint_{#1} #2 \:\mathrm{d} #3}
+\newcommand{\dblintegrate}[3]{\iint_{#1} #2 \:\mathrm{d} #3}
+\newcommand{\polygamma}[1]{\psi^{(#1)}}
+\newcommand{\polylog}[1]{\Li_{#1}}
+
+
+%Listings
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}

@@ -1,0 +1,148 @@
+\documentclass[../main.tex]{subfiles}
+\setcounter{chapter}{3}
+\begin{document}
+\chapter{ปริภูมิเวกเตอร์ทั่วไป (General Vector Spaces)}
+\section{ปริภูมิเวกเตอร์จริง (Real Vector Spaces)}
+    \definition{
+        ให้ $V$ เป็นเซตที่ไม่ใช่เซตว่างของวัตถุใดๆ 
+        ที่มีนิยามการดำเนินการสองชนิดคือการบวก (addition) 
+        และการคูณด้วยสเกลาร์ (scalar multiplication)
+        โดย \textbf{การบวก} หมายถึงกฎสำหรับการรวมกันของ
+        ของวัตถุ $\vect{u}$ และ $\vect{v}$ แต่ละคู่ใน $V$ 
+        ซึ่งวัตถุ $\vect u + \vect v$ เรียกว่า \textbf{ผลบวก} 
+        (sum) ของ $\vect{u}$ และ $\vect{v}$ 
+        ส่วนการคูณด้วยสเกลาร์ หมายถึงกฎสำหรับการรวมกันของ 
+        สเกลาร์ $k$ และวัตถุ $\vect u$ ใน $V$ ซึ่งวัตถุ 
+        $k\vect{u}$ เรียกว่า \textbf{พหุคูณสเกลาร์}
+        (scalar multiple) ของ $\vect u $ โดย $k$
+        ถ้าสัจพจน์ (axioms) ต่อไปนี้เป็นจริงสำหรับทุกๆ วัตถุ 
+        $\vect u, \vect v, \vect w$ ใน $V$ และทุกๆ สเกลาร์
+        $k$ และ $l$ แล้วเราเรียก  $V$ ว่าเป็น 
+        \textbf{ปริภูมิเวกเตอร์} (vector space) และเรียกวัตถุใน
+        $V$ ว่า \textbf{เวกเตอร์} (vector)
+
+        \begin{enumerate}[label = (\arabic*)]
+            \item ถ้า $\vect u$ และ $\vect v$ เป็นวัตถุใน $V$
+                แล้ว $\vect u + \vect v$ อยู่ใน $V$ ด้วย
+            \item $\vect u + \vect v = \vect v + \vect u$
+            \item $\vect u + (\vect v + \vect w) =
+                (\vect u + \vect v) + \vect w$
+            \item มีวัตถุ $\vect 0$ ใน $V$ เรียกว่า 
+                \textbf{เวกเตอร์ศูนย์} สำหรับ $V$ ที่ทำให้
+                $\vect 0 + \vect u = \vect u + \vect 0 
+                =\vect u$ สำหรับทุก $\vect u$ ใน $\vect v$
+            \item สำหรับแต่ละวัตถุ $\vect u$ ใน $V$ มีวัตถุ 
+                $-\vect u$ ใน $V$ เรียกว่า \textbf{ลบ} 
+                (Negative) ของ $\vect u$ ที่ทำให้
+                $\vect u + (- \vect u) = (- \vect u) + 
+                \vect u = \vect 0$
+            \item ถ้า $k$ เป็นสเกลาร์ใดๆ และ $\vect u$ เป็นวัตถุใน 
+                $V$ แล้ว $k\vect u$ อยู่ใน $V$ ด้วย
+            \item $k(\vect u +\vect v) = k\vect u + k\vect v$
+            \item $(k + l)\vect u = k\vect u + l\vect u$
+            \item $k(l\vect u) = (kl)\vect u$
+            \item $1\vect u =\vect u$ 
+        \end{enumerate}
+        }  
+    จากบทนิยามที่ 4.1.1 ด้านบน เราอาจมองได้ว่าปริภูมิเวกเตอร์ 
+    คือเซตของวัตถุหนึ่ง ที่มีนิยามการดำเนินการสองชนิดคือการบวก 
+    และการคูณด้วยสเกลาร์ ซึ่งเมื่อนำมาดำเนินการ กับสมาชิกในเซตดังกล่าวแล้ว 
+    จะได้ผลลัพธ์ที่สอดคล้องกับสัจพจน์ทั้งสิบประการ นิยามของปริภูมิเวกเตอร์
+    ไม่ขึ้นอยู่กับธรรมชาติของเวกเตอร์หรือตัวดำเนินการ วัตถุใดๆ อาจเป็นเวกเตอร์
+    และการดำเนินการบวก และการคูณด้วยสเกลาร์ อาจไม่มีความสัมพันธ์ 
+    หรือความคล้ายคลึงกันกับการดำเนินการเวกเตอร์มาตรฐานบน $\mathbb R^n$
+
+    สัจพจน์ประการที่ (1) และ (6) เรียกว่า 
+    \textbf{สมบัติปิดภายใต้การบวก}
+    (closure under addition) และ 
+    \textbf{สมบัติปิดภายใต้การคูณด้วยสเกลาร์} 
+    (closure under scalar multiplication) ตามลำดับ 
+    สมบัติสองประการนี้ เป็นเครื่องมือสำคัญที่ใช้ในการตรวจสอบว่า
+    เซตของวัตถุหนึ่งที่กำลังพิจารณา เป็นปริภูมิเวกเตอร์หรือไม่ 
+  
+\section{ปริภูมิย่อย (Subspaces)}
+    \definition{
+        เซตย่อย (Subset) $W$ ของปริภูมิเวกเตอร์ $V$ หนึ่งเรียกว่า
+        \textbf{ปริภูมิย่อยของ} (subspace) ของ $V$ ถ้า
+        $W$ เป็นปริภูมิเวกเตอร์ภายใต้การบวก และการคูณด้วยสเกลาร์
+        ที่นิยามบน $V$  
+    }
+    ในการตรจสอบว่าเซตย่อย $W$ ในปริภูมิเวกเตอร์ $V$ 
+    เป็นปริภูมิย่อยของ $V$ หรือไม่ เราไม่จำเป็นต้องตรวจสอบบางสัจพจน์
+    เนื่องจากความสอดคล้องกับสัจพจน์เหล่านี้ ได้รับการสืบต่อ 
+    (Inherited) จาก $V$ 
+    \theorem[]{
+        ถ้า $W$ เป็นเซตของเวกเตอร์มากกว่าหนึ่งตัวจากปริภูมิเวกเตอร์ $V$
+        แล้ว $W$ เป็นปริภูมิย่อยของ $V$ ก็ต่อเมื่อสอดคล้องกับเงื่อนไขต่อไปนี้
+        
+        \begin{enumerate}[itemsep = 0pt]
+            \item[(ก)] ถ้า $\vect u$ และ $\vect v$ 
+                เป็นเวกเตอร์ใน $W$ แล้ว $\vect u + \vect v$
+                อยู่ใน $W$ ด้วย
+            \item[(ข)] ถ้า $k$ เป็นสเกลาร์ใดๆ และ $\vect u$ 
+                เป็นเวกเตอร์ใดๆ ใน $W$ แล้ว $k\vect u$ 
+                อยู่ใน $W$ ด้วย
+        \end{enumerate}
+    }
+
+    \subsection{
+        ปริภูมิผลเฉลยของระบบสมการเอกพันธ์ 
+        (Solution Spaces of Homogeneous Equation)
+        } 
+        \theorem[]{
+            ถ้า $\matr{A}\vect{x} = \vect{0}$ เป็นระบบเชิงเส้นเอกพันธ์
+            ของ $m$ สมการในค่าไม่ทราบค่า $n$ ค่า แล้วเซตของเวกเตอร์ผลเฉลย
+            เป็นปริภูมิย่อยของ $\mathbb{R}^n$ 
+        } 
+        \definition{
+            เวกเตอร์ $\vect w$ หนึ่งเรียกว่า \textbf{ผลรวมเชิงเส้น}
+            (linear combination) ของปริภูมิเวกเตอร์
+            $\vect v_1, \vect v_2, \ldots, \vect v_r $ ถ้าสามารถเขียนให้อยู่ในรูป
+            $$\vect w = k_1\vect v_1 +k_2\vect v_2+\cdots + k_r\vect v_r $$
+            เมื่อ $k_1, k_2, \ldots, k_r$ เป็นสเกลาร์ใดๆ
+        }
+\section{การแผ่ทั่ว (Spanning)}
+    \theorem[]{
+        ถ้า $\vect v_1 , \vect v_2, \ldots, \vect v_r$
+        เป็นเวกเตอร์ในปริภูมิเวกเตอร์ $V$ แล้ว 
+        \begin{enumerate}
+            \item[(ก)] เซต $W$ ของผลรวมเชิงเส้นทั้งหมดของ
+                $\vect v_1, \vect v_2, \ldots, \vect v_r $
+                เป็นปริภูมิย่อยของ $V$
+            \item[(ข)] $W$ เป็นปริภูมิย่อยที่เล็กที่สุดของ $V$ 
+                ที่มี $\vect v_1, \vect v_2, \ldots, \vect v_r $
+                ในมุมที่ว่าปริภูมิย่อยอื่นใดของ $V$ ที่มี 
+                $\vect v_1, \vect v_2, \ldots, \vect v_r $
+                ต้องมี $W$
+        \end{enumerate}
+    }
+    \definition{
+        ถ้า $S = \lbrace \vect v_1, \vect v_2, \ldots, \vect v_r \rbrace$
+        เป็นเซตของเวกเตอร์ ในปริภูมิเวกเตอร์ $V$ แล้วปริภูมิย่อย $W$ ของ $V$
+        ที่ประกอบด้วยผลรวมเชิงเส้นทั้งหมดของเวกเตอร์ใน $S$ เรียกว่า
+        \textbf{ปริภูมิย่อยของ $V$ แผ่ทั่วโดย $S$} 
+        (subspace of $V$ spanned by $S$)
+        และเรากล่าวว่า เวกเตอร์ $\vect v_1, \vect v_2, \ldots, \vect v_r $
+        ใน $S$ \textbf{แผ่ทั่ว} (span) $W$
+    }
+    เราใช้สัญกรณ์ 
+    $$W = \spn(S) \quad \text{หรือ} 
+    \quad W = \spn \lbrace \vect v_1, \vect v_2, \ldots, \vect v_r  \rbrace
+    $$
+    เพื่อบ่งว่า $W$ เป็นปริภูมิที่แผ่ทั่วโดยเวกเตอร์ในเซต 
+    $S = \lbrace\vect v_1, \vect v_2, \ldots, \vect v_r\rbrace$
+\section{ความอิสระเชิงเส้น (Linear Independence)}
+    \definition{
+        ถ้า $S = \lbrace \vect v_1, \vect v_2, \ldots, \vect v_r  \rbrace$
+        เป็นเซตไม่ว่างของเวกเตอร์ แล้วสมการเวกเตอร์
+        $$k_1\vect v_1 + k_2\vect v_2 + \cdots + k_r\vect v_r = \vect 0$$
+        มีผลเฉลยอย่างน้อยผลเฉลยหนึ่ง คือ
+        $$k_1 = 0 ,\quad k_2 = 0, \ldots, \quad k_r = 0$$
+        ถ้าผลเฉลยมีเพียงหนึ่งเดียวนี้ แล้ว $S$ เรียกว่าเป็นเซตที่
+        \textbf{อิสระเชิงเส้น} (linearly independence)
+        ถ้ามีผลเฉลยอื่นอีก แล้ว $S$ เรียกว่าเป็นเซตที่ 
+        \textbf{ไม่อิสระเชิงเส้น} (linearly dependence)
+    }
+    \subsection{ความอิสระเชิงเส้นของฟังก์ชัน (Linear Dependent of Functions)}
+\section{ฐานหลักและมิติ (Basis and Dimension)}
+\end{document}

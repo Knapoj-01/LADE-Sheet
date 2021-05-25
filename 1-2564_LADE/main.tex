@@ -1,0 +1,16 @@
+\documentclass[final,11pt,a4paper,twoside]{report}
+\usepackage{mainbookpackage}
+\setenumerate{label=\textbf{\arabic*}., itemsep = 0pt, topsep = 0pt}
+\setlength{\baselineskip}{17pt}
+\setlength{\parskip}{0.7em}
+\renewcommand{\baselinestretch}{1.2} 
+\def\chapter{\secdef \chap \chaps}
+\def\chap[#1]#2{
+\stepcounter{chapter} \noindent
+{\huge\bf บทที่ \thechapter\  #2}
+\vskip 3pt \noindent\hrulefill\vskip 15pt}
+\def\chaps#1{Chapter #1}
+\usepackage{subfiles} 
+\begin{document}
+    \subfile{Chapters/Chapter4/Chapter4.tex}
+\end{document}
